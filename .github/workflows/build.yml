@@ -33,7 +33,7 @@ jobs:
         uses: docker/build-push-action@v3
         env:
           IMAGE_NAME_AND_TAG: ${{ format('{0}:{1}', env.IMAGE_NAME, env.IMAGE_TAG) }}
-          IMAGE_CACHE_FROM: ${{ format('type=registry,ref={0}:latest-buildcache,mode=max', env.IMAGE_NAME) }}
+          IMAGE_CACHE_FROM: ${{ format('type=registry,ref={0}:latest-buildcache', env.IMAGE_NAME) }}
           IMAGE_CACHE_TO: ${{ env.IMAGE_TAG == 'latest' && format('type=registry,ref={0}:latest-buildcache,mode=max', env.IMAGE_NAME) || '' }}
         with:
           context: .
