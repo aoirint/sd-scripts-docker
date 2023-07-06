@@ -1,2 +1,6 @@
 .python-version
 
+/base_model
+/work
+/cache
+
