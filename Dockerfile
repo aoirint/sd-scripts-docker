@@ -80,8 +80,8 @@ RUN <<EOF
 EOF
 
 ARG SD_SCRIPTS_URL=https://github.com/kohya-ss/sd-scripts
-# v0.6.4
-ARG SD_SCRIPTS_VERSION=e6ad3cbc66130fdc3bf9ecd1e0272969b1d613f7
+# v0.6.5
+ARG SD_SCRIPTS_VERSION=9a67e0df390033a89f17e70df5131393692c2a55
 
 RUN <<EOF
     set -eu
