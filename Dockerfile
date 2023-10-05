@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.4
+# syntax=docker/dockerfile:1.5
 ARG BASE_IMAGE=ubuntu:22.04
 ARG BASE_RUNTIME_IMAGE=nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 
