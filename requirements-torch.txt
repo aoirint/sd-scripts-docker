@@ -30,8 +30,6 @@ markupsafe==2.1.3
     # via jinja2
 mpmath==1.3.0
     # via sympy
-mypy-extensions==1.0.0
-    # via typing-inspect
 networkx==3.1
     # via torch
 numpy==1.26.0
@@ -40,8 +38,6 @@ numpy==1.26.0
     #   xformers
 pillow==10.0.1
     # via torchvision
-pyre-extensions==0.0.29
-    # via xformers
 requests==2.31.0
     # via torchvision
 sympy==1.12
@@ -58,13 +54,8 @@ torchvision==0.15.2+cu118
 triton==2.0.0
     # via torch
 typing-extensions==4.8.0
-    # via
-    #   pyre-extensions
-    #   torch
-    #   typing-inspect
-typing-inspect==0.9.0
-    # via pyre-extensions
+    # via torch
 urllib3==2.0.6
     # via requests
-xformers==0.0.20
+xformers==0.0.22
     # via -r requirements-torch.in
