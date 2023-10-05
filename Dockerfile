@@ -6,7 +6,7 @@ FROM ${BASE_IMAGE} AS python-env
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
-ENV PIP_NO_CACHE_DIR=1
+ARG PIP_NO_CACHE_DIR=1
 ARG PYENV_VERSION=v2.3.27
 ARG PYTHON_VERSION=3.10.13
 
@@ -54,7 +54,7 @@ FROM ${BASE_RUNTIME_IMAGE} AS runtime-env
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
-ENV PIP_NO_CACHE_DIR=1
+ARG PIP_NO_CACHE_DIR=1
 ENV PATH=/home/user/.local/bin:/opt/python/bin:${PATH}
 
 COPY --from=python-env /opt/python /opt/python
