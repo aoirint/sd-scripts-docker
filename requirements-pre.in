@@ -4,3 +4,6 @@ torchvision==0.15.2+cu118
 xformers==0.0.22
 lion-pytorch
 dadaptation
+
+# https://github.com/KohakuBlueleaf/LyCORIS
+lycoris-lora
