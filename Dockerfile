@@ -96,12 +96,14 @@ RUN <<EOF
 EOF
 
 WORKDIR /code/sd-scripts
-ADD ./requirements-torch.txt /code/sd-scripts/
+ADD ./requirements-pre.txt /code/
 RUN <<EOF
     set -eu
 
+    cd /code/
+    gosu user pip3 install --no-cache-dir -r ./requirements-pre.txt
+
     cd /code/sd-scripts/
-    gosu user pip3 install --no-cache-dir -r ./requirements-torch.txt
     gosu user pip3 install --no-cache-dir -r ./requirements.txt
 EOF
 
