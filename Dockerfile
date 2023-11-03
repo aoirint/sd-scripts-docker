@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.6
 ARG BASE_IMAGE=ubuntu:22.04
-ARG BASE_RUNTIME_IMAGE=nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
+ARG BASE_RUNTIME_IMAGE=nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
 
 FROM ${BASE_IMAGE} AS python-env
 
