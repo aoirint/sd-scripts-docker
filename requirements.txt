@@ -257,7 +257,7 @@ rpds-py==0.12.0
     #   referencing
 rsa==4.9
     # via google-auth
-safetensors==0.4.0
+safetensors==0.2.6
     # via
     #   -r requirements.in
     #   lycoris-lora
