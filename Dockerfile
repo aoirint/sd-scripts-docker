@@ -104,7 +104,7 @@ RUN <<EOF
     gosu user pip3 install --no-cache-dir -r ./requirements.txt
 
     cd /code/sd-scripts/
-    gosu user pip3 install --no-cache-dir .
+    gosu user pip3 install --no-cache-dir --editable .
 EOF
 
 RUN <<EOF
