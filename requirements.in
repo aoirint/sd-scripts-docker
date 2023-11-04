@@ -1,4 +1,4 @@
-# Copied from kohya-ss/sd-scripts
+# Originally copied from kohya-ss/sd-scripts
 # https://github.com/kohya-ss/sd-scripts/blob/54500b861dff5bc1c6b555733d355a320935bf34/requirements.txt
 accelerate==0.15.0
 transformers
