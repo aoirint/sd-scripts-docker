@@ -79,15 +79,27 @@ RUN <<EOF
     useradd -m -o -u 1000 -g user user
 EOF
 
+RUN <<EOF
+    set -eu
+
+    mkdir -p /code
+    chown -R user:user /code
+EOF
+
+ADD ./requirements.txt /code/
+RUN <<EOF
+    set -eu
+
+    cd /code/
+    gosu user pip3 install --no-cache-dir -r ./requirements.txt
+EOF
+
 ARG SD_SCRIPTS_URL=https://github.com/kohya-ss/sd-scripts
 # v0.6.6
 ARG SD_SCRIPTS_VERSION=54500b861dff5bc1c6b555733d355a320935bf34
 
 RUN <<EOF
     set -eu
-
-    mkdir -p /code
-    chown -R user:user /code
 
     gosu user git clone "${SD_SCRIPTS_URL}" /code/sd-scripts
     cd /code/sd-scripts
@@ -96,15 +108,11 @@ RUN <<EOF
 EOF
 
 WORKDIR /code/sd-scripts
-ADD ./requirements-pre.txt /code/
 RUN <<EOF
     set -eu
 
-    cd /code/
-    gosu user pip3 install --no-cache-dir -r ./requirements-pre.txt
-
     cd /code/sd-scripts/
-    gosu user pip3 install --no-cache-dir -r ./requirements.txt
+    gosu user pip3 install --no-cache-dir --editable .
 EOF
 
 RUN <<EOF
