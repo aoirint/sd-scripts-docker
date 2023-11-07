@@ -22,7 +22,7 @@ requests==2.28.2
 timm==0.6.12
 fairscale==0.4.13
 # for WD14 captioning (tensorflow)
-tensorflow==2.10.1
+tensorflow==2.14.0
 # for WD14 captioning (onnx)
 # onnx==1.14.1
 # onnxruntime-gpu==1.16.0
