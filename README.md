@@ -99,7 +99,6 @@ sudo docker run --rm --gpus all \
 
 ```shell
 sudo docker run --rm --gpus all \
-  -v "./base_model:/base_model" \
   -v "./work:/work" \
   -v "./cache/huggingface/hub:/home/user/.cache/huggingface/hub" \
   aoirint/sd_scripts \
