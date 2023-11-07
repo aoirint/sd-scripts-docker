@@ -10,7 +10,7 @@ absl-py==2.0.0
     # via
     #   tensorboard
     #   tensorflow
-accelerate==0.15.0
+accelerate==0.23.0
     # via
     #   -r requirements.in
     #   diffusers
@@ -45,7 +45,7 @@ cmake==3.27.7
     # via triton
 dadaptation==3.1
     # via -r requirements.in
-diffusers[torch]==0.10.2
+diffusers[torch]==0.21.2
     # via
     #   -r requirements.in
     #   lycoris-lora
@@ -75,14 +75,16 @@ fsspec[http]==2023.10.0
     #   huggingface-hub
     #   pytorch-lightning
 ftfy==6.1.1
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   open-clip-torch
 gast==0.4.0
     # via tensorflow
 google-auth==2.23.4
     # via
     #   google-auth-oauthlib
     #   tensorboard
-google-auth-oauthlib==0.4.6
+google-auth-oauthlib==1.0.0
     # via tensorboard
 google-pasta==0.2.0
     # via tensorflow
@@ -95,7 +97,9 @@ h5py==3.10.0
 huggingface-hub==0.15.1
     # via
     #   -r requirements.in
+    #   accelerate
     #   diffusers
+    #   open-clip-torch
     #   timm
     #   transformers
 idna==3.4
@@ -116,9 +120,7 @@ jsonschema==4.19.2
     # via altair
 jsonschema-specifications==2023.7.1
     # via jsonschema
-keras==2.10.0
-    # via tensorflow
-keras-preprocessing==1.1.2
+keras==2.14.0
     # via tensorflow
 lazy-loader==0.3
     # via scikit-image
@@ -140,6 +142,8 @@ markupsafe==2.1.3
     # via
     #   jinja2
     #   werkzeug
+ml-dtypes==0.2.0
+    # via tensorflow
 mpmath==1.3.0
     # via sympy
 multidict==6.0.4
@@ -159,7 +163,7 @@ numpy==1.26.1
     #   fairscale
     #   h5py
     #   imageio
-    #   keras-preprocessing
+    #   ml-dtypes
     #   opencv-python
     #   opencv-python-headless
     #   opt-einsum
@@ -178,6 +182,8 @@ numpy==1.26.1
     #   xformers
 oauthlib==3.2.2
     # via requests-oauthlib
+open-clip-torch==2.20.0
+    # via -r requirements.in
 opencv-python==4.7.0.68
     # via -r requirements.in
 opencv-python-headless==4.8.1.78
@@ -203,8 +209,9 @@ pillow==10.0.1
     #   imageio
     #   scikit-image
     #   torchvision
-protobuf==3.19.6
+protobuf==3.20.3
     # via
+    #   open-clip-torch
     #   tensorboard
     #   tensorflow
 psutil==5.9.6
@@ -238,6 +245,7 @@ referencing==0.30.2
 regex==2023.10.3
     # via
     #   diffusers
+    #   open-clip-torch
     #   transformers
 requests==2.28.2
     # via
@@ -257,10 +265,12 @@ rpds-py==0.12.0
     #   referencing
 rsa==4.9
     # via google-auth
-safetensors==0.2.6
+safetensors==0.3.1
     # via
     #   -r requirements.in
+    #   diffusers
     #   lycoris-lora
+    #   transformers
 scikit-image==0.22.0
     # via albumentations
 scikit-learn==1.3.2
@@ -270,26 +280,26 @@ scipy==1.11.3
     #   albumentations
     #   scikit-image
     #   scikit-learn
+sentencepiece==0.1.99
+    # via open-clip-torch
 six==1.16.0
     # via
     #   astunparse
     #   google-pasta
-    #   keras-preprocessing
     #   python-dateutil
+    #   tensorboard
     #   tensorflow
 sympy==1.12
     # via torch
-tensorboard==2.10.1
+tensorboard==2.14.1
     # via
     #   -r requirements.in
     #   tensorflow
-tensorboard-data-server==0.6.1
+tensorboard-data-server==0.7.2
     # via tensorboard
-tensorboard-plugin-wit==1.8.1
-    # via tensorboard
-tensorflow==2.10.1
+tensorflow==2.14.0
     # via -r requirements.in
-tensorflow-estimator==2.10.0
+tensorflow-estimator==2.14.0
     # via tensorflow
 tensorflow-io-gcs-filesystem==0.34.0
     # via tensorflow
@@ -300,7 +310,9 @@ threadpoolctl==3.2.0
 tifffile==2023.9.26
     # via scikit-image
 timm==0.6.12
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   open-clip-torch
 tokenizers==0.13.3
     # via transformers
 toml==0.10.2
@@ -315,6 +327,7 @@ torch==2.0.1+cu118
     #   fairscale
     #   lion-pytorch
     #   lycoris-lora
+    #   open-clip-torch
     #   pytorch-lightning
     #   timm
     #   torchmetrics
@@ -326,13 +339,15 @@ torchmetrics==1.2.0
 torchvision==0.15.2+cu118
     # via
     #   -r requirements.in
+    #   open-clip-torch
     #   timm
 tqdm==4.66.1
     # via
     #   huggingface-hub
+    #   open-clip-torch
     #   pytorch-lightning
     #   transformers
-transformers==4.26.0
+transformers==4.30.2
     # via
     #   -r requirements.in
     #   lycoris-lora
@@ -357,10 +372,8 @@ wcwidth==0.2.9
 werkzeug==3.0.1
     # via tensorboard
 wheel==0.41.3
-    # via
-    #   astunparse
-    #   tensorboard
-wrapt==1.15.0
+    # via astunparse
+wrapt==1.14.1
     # via tensorflow
 xformers==0.0.22
     # via -r requirements.in
