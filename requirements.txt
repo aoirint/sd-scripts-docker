@@ -78,7 +78,7 @@ ftfy==6.1.1
     # via
     #   -r requirements.in
     #   open-clip-torch
-gast==0.4.0
+gast==0.5.4
     # via tensorflow
 google-auth==2.23.4
     # via
@@ -106,7 +106,7 @@ idna==3.4
     # via
     #   requests
     #   yarl
-imageio==2.31.6
+imageio==2.32.0
     # via scikit-image
 importlib-metadata==6.8.0
     # via diffusers
