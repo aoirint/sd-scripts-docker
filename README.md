@@ -94,3 +94,15 @@ sudo docker run --rm --gpus all \
   --v2 \
   --v_parameterization
 ```
+
+### Example: WD14 Captioning (Tensorflow)
+
+```shell
+sudo docker run --rm --gpus all \
+  -v "./base_model:/base_model" \
+  -v "./work:/work" \
+  -v "./cache/huggingface/hub:/home/user/.cache/huggingface/hub" \
+  aoirint/sd_scripts \
+  finetune/tag_images_by_wd14_tagger.py
+  /work/my_dataset-20230715.1/img
+```
