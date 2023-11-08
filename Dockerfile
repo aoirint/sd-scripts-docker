@@ -79,6 +79,15 @@ RUN <<EOF
     useradd -m -o -u 1000 -g user user
 EOF
 
+# libnvrtc.so workaround
+RUN <<EOF
+    set -eu
+
+    ln -s \
+        /usr/local/cuda-11.8/targets/x86_64-linux/lib/libnvrtc.so.11.2 \
+        /usr/local/cuda-11.8/targets/x86_64-linux/lib/libnvrtc.so
+EOF
+
 RUN <<EOF
     set -eu
 
