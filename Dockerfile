@@ -80,6 +80,7 @@ RUN <<EOF
 EOF
 
 # libnvrtc.so workaround
+# https://github.com/aoirint/sd-scripts-docker/issues/19
 RUN <<EOF
     set -eu
 
