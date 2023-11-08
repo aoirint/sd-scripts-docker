@@ -98,10 +98,17 @@ sudo docker run --rm --gpus all \
 ### Example: WD14 Captioning (Tensorflow)
 
 ```shell
+mkdir -p "./cache/wd14_tagger_model_cache"
+sudo chown -R 1000:1000 "./cache/wd14_tagger_model_cache"
+
+# If your cache is broken, execute
+# rm -rf ./cache/wd14_tagger_model_cache/wd14_tagger_model
+
 sudo docker run --rm --gpus all \
   -v "./work:/work" \
-  -v "./cache/huggingface/hub:/home/user/.cache/huggingface/hub" \
+  -v "./cache/wd14_tagger_model_cache:/wd14_tagger_model_cache" \
   aoirint/sd_scripts \
   finetune/tag_images_by_wd14_tagger.py \
+  --model_dir "/wd14_tagger_model_cache/wd14_tagger_model" \
   /work/my_dataset-20230715.1/img
 ```
