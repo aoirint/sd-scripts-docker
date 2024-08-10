@@ -51,10 +51,20 @@ EOF
 
 FROM ${BASE_RUNTIME_IMAGE} AS build-python-venv-stage
 
+ARG DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
 
-COPY --from=build-python-stage --chown=root:root /opt/python /opt/python
-ENV PATH="/opt/python/bin:${PATH}"
+RUN <<EOF
+    set -eu
+
+    apt-get update
+    apt-get install -y \
+        git \
+        gosu
+
+    apt-get clean
+    rm -rf /var/lib/apt/lists/*
+EOF
 
 ARG VENV_BUILDER_UID=999
 ARG VENV_BUILDER_GID=999
@@ -65,20 +75,16 @@ RUN <<EOF
     useradd --non-unique --uid "${VENV_BUILDER_UID}" --gid "${VENV_BUILDER_GID}" --create-home venvbuilder
 EOF
 
+COPY --from=build-python-stage --chown=root:root /opt/python /opt/python
+ENV PATH="/opt/python/bin:${PATH}"
+
 RUN <<EOF
     set -eu
 
     mkdir -p /opt/python_venv
     chown -R "${VENV_BUILDER_UID}:${VENV_BUILDER_GID}" /opt/python_venv
 
-    mkdir -p /opt/python_venv_tmp
-    chown -R "${VENV_BUILDER_UID}:${VENV_BUILDER_GID}" /opt/python_venv_tmp
-EOF
-
-USER venvbuilder
-
-RUN <<EOF
-    python -m venv /opt/python_venv
+    gosu venvbuilder python -m venv /opt/python_venv
 EOF
 ENV PATH="/opt/python_venv/bin:${PATH}"
 
@@ -86,7 +92,7 @@ COPY --chown=root:root ./requirements.txt /python_venv_tmp/
 RUN --mount=type=cache,uid=${VENV_BUILDER_UID},gid=${VENV_BUILDER_GID},target=/home/venvbuilder/.cache/pip <<EOF
     set -eu
 
-    pip install -r /python_venv_tmp/requirements.txt
+    gosu venvbuilder pip install -r /python_venv_tmp/requirements.txt
 EOF
 
 ARG SD_SCRIPTS_URL=https://github.com/kohya-ss/sd-scripts
