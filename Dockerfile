@@ -115,7 +115,7 @@ RUN --mount=type=cache,uid=${VENV_BUILDER_UID},gid=${VENV_BUILDER_GID},target=/h
     set -eu
 
     cd /opt/sd-scripts/
-    gosu venvbuilder pip -m compileall .
+    gosu venvbuilder python -m compileall .
     gosu venvbuilder pip install --no-deps --editable .
 EOF
 
