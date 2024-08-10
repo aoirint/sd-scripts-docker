@@ -102,6 +102,9 @@ ARG SD_SCRIPTS_VERSION=2a23713f71628b2d1b88a51035b3e4ee2b5dbe46
 RUN <<EOF
     set -eu
 
+    mkdir -p /opt/sd-scripts
+    chown -R "${VENV_BUILDER_UID}:${VENV_BUILDER_GID}" /opt/sd-scripts
+
     gosu venvbuilder git clone "${SD_SCRIPTS_URL}" /opt/sd-scripts
     cd /opt/sd-scripts
     gosu venvbuilder git checkout "${SD_SCRIPTS_VERSION}"
