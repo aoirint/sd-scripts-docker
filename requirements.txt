@@ -184,7 +184,7 @@ oauthlib==3.2.2
     # via requests-oauthlib
 open-clip-torch==2.20.0
     # via -r requirements.in
-opencv-python==4.7.0.68
+opencv-python==4.8.1.78
     # via -r requirements.in
 opencv-python-headless==4.8.1.78
     # via
