@@ -343,7 +343,7 @@ torchvision==0.15.2+cu118
     #   -r requirements.in
     #   open-clip-torch
     #   timm
-tqdm==4.66.1
+tqdm==4.66.3
     # via
     #   huggingface-hub
     #   open-clip-torch
