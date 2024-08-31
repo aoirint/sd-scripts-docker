@@ -18,7 +18,7 @@ toml==0.10.2
 voluptuous==0.13.1
 huggingface-hub==0.15.1
 # for BLIP captioning
-requests==2.31.0
+requests==2.32.2
 timm==0.6.12
 fairscale==0.4.13
 # for WD14 captioning (tensorflow)
