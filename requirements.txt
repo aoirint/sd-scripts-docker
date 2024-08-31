@@ -102,7 +102,7 @@ huggingface-hub==0.15.1
     #   open-clip-torch
     #   timm
     #   transformers
-idna==3.4
+idna==3.7
     # via
     #   requests
     #   yarl
