@@ -71,7 +71,7 @@ Execute training.
 sudo docker run --rm --gpus all \
   -v "./base_model:/base_model" \
   -v "./work:/work" \
-  -v "./cache/huggingface/hub:/home/user/.cache/huggingface/hub" \
+  -v "./cache/huggingface/hub:/huggingface/hub" \
   aoirint/sd_scripts \
   --num_cpu_threads_per_process 1 \
   train_network.py \

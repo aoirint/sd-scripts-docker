@@ -2,7 +2,7 @@
 ARG BASE_IMAGE=ubuntu:22.04
 ARG BASE_RUNTIME_IMAGE=nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
 
-FROM ${BASE_IMAGE} AS python-env
+FROM ${BASE_IMAGE} AS build-python-stage
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
@@ -49,15 +49,81 @@ RUN <<EOF
     rm -rf /opt/python-build /opt/pyenv
 EOF
 
+FROM ${BASE_RUNTIME_IMAGE} AS build-python-venv-stage
+
+ARG DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+
+RUN <<EOF
+    set -eu
+
+    apt-get update
+    apt-get install -y \
+        git \
+        gosu
+
+    apt-get clean
+    rm -rf /var/lib/apt/lists/*
+EOF
+
+ARG VENV_BUILDER_UID=999
+ARG VENV_BUILDER_GID=999
+RUN <<EOF
+    set -eu
+
+    groupadd --non-unique --gid "${VENV_BUILDER_GID}" venvbuilder
+    useradd --non-unique --uid "${VENV_BUILDER_UID}" --gid "${VENV_BUILDER_GID}" --create-home venvbuilder
+EOF
+
+COPY --from=build-python-stage --chown=root:root /opt/python /opt/python
+ENV PATH="/opt/python/bin:${PATH}"
+
+RUN <<EOF
+    set -eu
+
+    mkdir -p /opt/python_venv
+    chown -R "${VENV_BUILDER_UID}:${VENV_BUILDER_GID}" /opt/python_venv
+
+    gosu venvbuilder python -m venv /opt/python_venv
+EOF
+ENV PATH="/opt/python_venv/bin:${PATH}"
+
+COPY --chown=root:root ./requirements.txt /python_venv_tmp/
+RUN --mount=type=cache,uid=${VENV_BUILDER_UID},gid=${VENV_BUILDER_GID},target=/home/venvbuilder/.cache/pip <<EOF
+    set -eu
+
+    gosu venvbuilder pip install -r /python_venv_tmp/requirements.txt
+EOF
+
+ARG SD_SCRIPTS_URL=https://github.com/kohya-ss/sd-scripts
+# v0.7.0
+ARG SD_SCRIPTS_VERSION=2a23713f71628b2d1b88a51035b3e4ee2b5dbe46
+
+RUN <<EOF
+    set -eu
+
+    mkdir -p /opt/sd-scripts
+    chown -R "${VENV_BUILDER_UID}:${VENV_BUILDER_GID}" /opt/sd-scripts
+
+    gosu venvbuilder git clone "${SD_SCRIPTS_URL}" /opt/sd-scripts
+    cd /opt/sd-scripts
+    gosu venvbuilder git checkout "${SD_SCRIPTS_VERSION}"
+    gosu venvbuilder git submodule update --init
+EOF
+
+RUN --mount=type=cache,uid=${VENV_BUILDER_UID},gid=${VENV_BUILDER_GID},target=/home/venvbuilder/.cache/pip <<EOF
+    set -eu
+
+    cd /opt/sd-scripts/
+    gosu venvbuilder python -m compileall .
+    gosu venvbuilder pip install --no-deps --editable .
+EOF
+
 
 FROM ${BASE_RUNTIME_IMAGE} AS runtime-env
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
-ARG PIP_NO_CACHE_DIR=1
-ENV PATH=/home/user/.local/bin:/opt/python/bin:${PATH}
-
-COPY --from=python-env /opt/python /opt/python
 
 RUN <<EOF
     set -eu
@@ -66,17 +132,10 @@ RUN <<EOF
     apt-get install -y \
         git \
         tk \
-        libglib2.0-0 \
-        gosu
+        libglib2.0-0
+
     apt-get clean
     rm -rf /var/lib/apt/lists/*
-EOF
-
-RUN <<EOF
-    set -eu
-
-    groupadd -o -g 1000 user
-    useradd -m -o -u 1000 -g user user
 EOF
 
 # libnvrtc.so workaround
@@ -89,48 +148,26 @@ RUN <<EOF
         /usr/local/cuda-11.8/targets/x86_64-linux/lib/libnvrtc.so
 EOF
 
-RUN <<EOF
-    set -eu
+COPY --from=build-python-stage --chown=root:root /opt/python /opt/python
+COPY --from=build-python-venv-stage --chown=root:root /opt/python_venv /opt/python_venv
+COPY --from=build-python-venv-stage --chown=root:root /opt/sd-scripts /opt/sd-scripts
+ENV PATH="/opt/python_venv/bin:${PATH}"
 
-    mkdir -p /code
-    chown -R user:user /code
-EOF
+WORKDIR /opt/sd-scripts
 
-ADD ./requirements.txt /code/
-RUN <<EOF
-    set -eu
-
-    cd /code/
-    gosu user pip3 install --no-cache-dir -r ./requirements.txt
-EOF
-
-ARG SD_SCRIPTS_URL=https://github.com/kohya-ss/sd-scripts
-# v0.7.0
-ARG SD_SCRIPTS_VERSION=2a23713f71628b2d1b88a51035b3e4ee2b5dbe46
+# huggingface cache dir
+ENV HF_HOME=/huggingface
 
 RUN <<EOF
     set -eu
 
-    gosu user git clone "${SD_SCRIPTS_URL}" /code/sd-scripts
-    cd /code/sd-scripts
-    gosu user git checkout "${SD_SCRIPTS_VERSION}"
-    gosu user git submodule update --init
-EOF
+    # create huggingface cache dir
+    mkdir -p /huggingface
 
-WORKDIR /code/sd-scripts
-RUN <<EOF
-    set -eu
+    # create accelerate cache dir
+    mkdir -p /huggingface/accelerate
 
-    cd /code/sd-scripts/
-    gosu user pip3 install --no-cache-dir --editable .
-EOF
-
-RUN <<EOF
-    set -eu
-
-    # gosu user accelerate config
-    gosu user mkdir -p /home/user/.cache/huggingface/accelerate
-    gosu user tee /home/user/.cache/huggingface/accelerate/default_config.yaml <<EOT
+    tee /huggingface/accelerate/default_config.yaml <<EOT
 command_file: null
 commands: null
 compute_environment: LOCAL_MACHINE
@@ -155,6 +192,9 @@ tpu_zone: null
 use_cpu: false
 EOT
 
+    # writable by default execution user
+    chown -R "1000:1000" /huggingface
 EOF
 
-ENTRYPOINT [ "gosu", "user", "accelerate", "launch" ]
+USER "1000:1000"
+ENTRYPOINT [ "accelerate", "launch" ]
