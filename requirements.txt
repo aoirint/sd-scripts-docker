@@ -371,7 +371,7 @@ voluptuous==0.13.1
     # via -r requirements.in
 wcwidth==0.2.9
     # via ftfy
-werkzeug==3.0.3
+werkzeug==3.0.6
     # via tensorboard
 wheel==0.41.3
     # via
