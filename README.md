@@ -4,7 +4,7 @@ Dockerfile for [aoirint/sd-scripts](https://github.com/aoirint/sd-scripts), a pe
 
 ## Differences from the original repository
 
-This patch is applied. Technical accuracy is not guaranteed.
+This patch is applied. Technical validity is not guaranteed.
 
 - https://github.com/aoirint/sd-scripts/pull/1
 
