@@ -325,7 +325,7 @@ tqdm==4.67.1
     #   open-clip-torch
     #   pytorch-lightning
     #   transformers
-transformers==4.36.2
+transformers==4.38.0
     # via -r requirements.in
 triton==2.1.0
     # via torch
