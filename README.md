@@ -10,7 +10,7 @@ This patch is applied. Technical validity is not guaranteed.
 
 ## Requirements
 
-- Docker Engine >= 23.0
+- Docker Engine >= 27.0
 - [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
 
 ## Usage
