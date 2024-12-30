@@ -170,7 +170,7 @@ oauthlib==3.2.2
     # via requests-oauthlib
 open-clip-torch==2.20.0
     # via -r requirements.in
-opencv-python==4.7.0.68
+opencv-python==4.7.0.72
     # via -r requirements.in
 opt-einsum==3.4.0
     # via tensorflow
