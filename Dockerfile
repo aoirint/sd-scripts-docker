@@ -96,8 +96,8 @@ RUN --mount=type=cache,uid=${VENV_BUILDER_UID},gid=${VENV_BUILDER_GID},target=/h
 EOF
 
 ARG SD_SCRIPTS_URL=https://github.com/kohya-ss/sd-scripts
-# v0.8.7
-ARG SD_SCRIPTS_VERSION=bfb352bc433326a77aca3124248331eb60c49e8c
+# dev
+ARG SD_SCRIPTS_VERSION=e5ac09574928ec02fba5fe78267764d26bb7faa6
 
 RUN <<EOF
     set -eu
