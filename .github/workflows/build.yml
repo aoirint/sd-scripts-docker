@@ -17,8 +17,6 @@ jobs:
   docker-build-and-push:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
       - name: Free disk space
         run: |-
           # https://github.com/actions/runner-images/issues/2840#issuecomment-2272410832
@@ -38,6 +36,8 @@ jobs:
             /usr/share/dotnet \
             /usr/share/swift
           df -h /
+
+      - uses: actions/checkout@v4
 
       - name: Setup Docker Buildx
         id: buildx
