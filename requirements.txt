@@ -81,7 +81,7 @@ google-auth==2.37.0
     # via
     #   google-auth-oauthlib
     #   tensorboard
-google-auth-oauthlib==0.4.6
+google-auth-oauthlib==1.0.0
     # via tensorboard
 google-pasta==0.2.0
     # via tensorflow
@@ -108,6 +108,10 @@ imagesize==1.4.1
     # via -r requirements.in
 importlib-metadata==8.5.0
     # via diffusers
+jax==0.4.38
+    # via tensorflow
+jaxlib==0.4.38
+    # via jax
 jinja2==3.1.5
     # via
     #   altair
@@ -116,9 +120,7 @@ jsonschema==4.23.0
     # via altair
 jsonschema-specifications==2024.10.1
     # via jsonschema
-keras==2.10.0
-    # via tensorflow
-keras-preprocessing==1.1.2
+keras==2.12.0
     # via tensorflow
 libclang==18.1.1
     # via tensorflow
@@ -140,6 +142,10 @@ markupsafe==3.0.2
     #   werkzeug
 mdurl==0.1.2
     # via markdown-it-py
+ml-dtypes==0.5.0
+    # via
+    #   jax
+    #   jaxlib
 mpmath==1.3.0
     # via sympy
 multidict==6.1.0
@@ -148,7 +154,7 @@ multidict==6.1.0
     #   yarl
 networkx==3.4.2
     # via torch
-numpy==2.2.1
+numpy==1.24.3
     # via
     #   accelerate
     #   altair
@@ -156,10 +162,13 @@ numpy==2.2.1
     #   diffusers
     #   fairscale
     #   h5py
-    #   keras-preprocessing
+    #   jax
+    #   jaxlib
+    #   ml-dtypes
     #   opencv-python
     #   pandas
     #   pytorch-lightning
+    #   scipy
     #   tensorboard
     #   tensorflow
     #   torchmetrics
@@ -173,7 +182,9 @@ open-clip-torch==2.20.0
 opencv-python==4.7.0.72
     # via -r requirements.in
 opt-einsum==3.4.0
-    # via tensorflow
+    # via
+    #   jax
+    #   tensorflow
 packaging==24.2
     # via
     #   accelerate
@@ -195,7 +206,7 @@ propcache==0.2.1
     # via
     #   aiohttp
     #   yarl
-protobuf==3.19.6
+protobuf==3.20.3
     # via
     #   open-clip-torch
     #   tensorboard
@@ -257,28 +268,29 @@ safetensors==0.4.2
     #   accelerate
     #   diffusers
     #   transformers
+scipy==1.14.1
+    # via
+    #   jax
+    #   jaxlib
 sentencepiece==0.2.0
     # via open-clip-torch
 six==1.17.0
     # via
     #   astunparse
     #   google-pasta
-    #   keras-preprocessing
     #   python-dateutil
     #   tensorflow
 sympy==1.13.3
     # via torch
-tensorboard==2.10.1
+tensorboard==2.12.3
     # via
     #   -r requirements.in
     #   tensorflow
-tensorboard-data-server==0.6.1
+tensorboard-data-server==0.7.2
     # via tensorboard
-tensorboard-plugin-wit==1.8.1
-    # via tensorboard
-tensorflow==2.10.1
+tensorflow==2.12.1
     # via -r requirements.in
-tensorflow-estimator==2.10.0
+tensorflow-estimator==2.12.0
     # via tensorflow
 tensorflow-io-gcs-filesystem==0.37.1
     # via tensorflow
@@ -329,7 +341,7 @@ transformers==4.36.2
     # via -r requirements.in
 triton==2.1.0
     # via torch
-typing-extensions==4.12.2
+typing-extensions==4.5.0
     # via
     #   huggingface-hub
     #   lightning-utilities
@@ -351,7 +363,7 @@ wheel==0.45.1
     # via
     #   astunparse
     #   tensorboard
-wrapt==1.17.0
+wrapt==1.14.1
     # via tensorflow
 xformers==0.0.23.post1+cu118
     # via -r requirements.in
