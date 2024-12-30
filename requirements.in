@@ -34,9 +34,9 @@ open-clip-torch==2.20.0
 
 # PyTorch
 --extra-index-url https://download.pytorch.org/whl/cu118
-torch==2.0.1+cu118
-torchvision==0.15.2+cu118
-xformers==0.0.22
+torch==2.1.2+cu118
+torchvision==0.16.2+cu118
+xformers==0.0.23.post1
 lion-pytorch
 dadaptation
 
