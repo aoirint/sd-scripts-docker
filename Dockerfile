@@ -95,9 +95,10 @@ RUN --mount=type=cache,uid=${VENV_BUILDER_UID},gid=${VENV_BUILDER_GID},target=/h
     gosu venvbuilder pip install -r /python_venv_tmp/requirements.txt
 EOF
 
-ARG SD_SCRIPTS_URL=https://github.com/kohya-ss/sd-scripts
-# dev
-ARG SD_SCRIPTS_VERSION=e5ac09574928ec02fba5fe78267764d26bb7faa6
+ARG SD_SCRIPTS_URL=https://github.com/aoirint/sd-scripts
+# Patch for https://github.com/kohya-ss/sd-scripts/issues/937
+# https://github.com/aoirint/sd-scripts/pull/1
+ARG SD_SCRIPTS_VERSION=b0296d995577d42195c4dcddcae0bacdd0962666
 
 RUN <<EOF
     set -eu
