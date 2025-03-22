@@ -167,7 +167,6 @@ numpy==1.24.3
     #   ml-dtypes
     #   opencv-python
     #   pandas
-    #   pytorch-lightning
     #   scipy
     #   tensorboard
     #   tensorflow
@@ -223,7 +222,7 @@ pygments==2.19.1
     # via rich
 python-dateutil==2.9.0.post0
     # via pandas
-pytorch-lightning==1.9.0
+pytorch-lightning==2.4.0
     # via -r requirements.in
 pytz==2025.1
     # via pandas
