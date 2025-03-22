@@ -1,5 +1,5 @@
 # Originally copied from kohya-ss/sd-scripts
-# https://github.com/kohya-ss/sd-scripts/blob/4c98c0787bb79c8a7fa8c1f74db0fd18b0f031c1/requirements.txt
+# https://github.com/kohya-ss/sd-scripts/blob/8f4ee8fc343b047965cd8976fca65c3a35b7593a/requirements.txt
 accelerate==0.30.0
 transformers==4.44.0
 diffusers[torch]==0.25.0
