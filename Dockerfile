@@ -96,9 +96,11 @@ RUN --mount=type=cache,uid=${VENV_BUILDER_UID},gid=${VENV_BUILDER_GID},target=/h
 EOF
 
 ARG SD_SCRIPTS_URL=https://github.com/aoirint/sd-scripts
-# Patch for https://github.com/kohya-ss/sd-scripts/issues/937
+# Based on kohya-ss/sd-scripts@v0.9.1
+# https://github.com/kohya-ss/sd-scripts/commit/8f4ee8fc343b047965cd8976fca65c3a35b7593a
+# Patched for https://github.com/kohya-ss/sd-scripts/issues/937
 # https://github.com/aoirint/sd-scripts/pull/1
-ARG SD_SCRIPTS_VERSION=b0296d995577d42195c4dcddcae0bacdd0962666
+ARG SD_SCRIPTS_VERSION=4c98c0787bb79c8a7fa8c1f74db0fd18b0f031c1
 
 RUN <<EOF
     set -eu
