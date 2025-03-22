@@ -300,7 +300,7 @@ timm==0.6.12
     # via
     #   -r requirements.in
     #   open-clip-torch
-tokenizers==0.19.1
+tokenizers==0.21.1
     # via transformers
 toml==0.10.2
     # via
@@ -337,7 +337,7 @@ tqdm==4.67.1
     #   open-clip-torch
     #   pytorch-lightning
     #   transformers
-transformers==4.44.0
+transformers==4.48.0
     # via -r requirements.in
 triton==2.1.0
     # via torch
