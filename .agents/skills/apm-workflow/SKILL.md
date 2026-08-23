@@ -245,16 +245,24 @@ authoring target such as `.agents/skills/` and a package directory such as
 
 1. Identify the canonical source and each distributed copy. Use a supported
    generator when one exists; otherwise update every copy in the same change.
-2. Compare relative file sets and content hashes before release. A missing,
+2. Keep validation artifacts out of canonical package trees before locking or
+   deployment. Run import-based validators with bytecode writes disabled, such as
+   with `PYTHONDONTWRITEBYTECODE=1`, or against a disposable copy. Inventory ignored
+   as well as tracked files for transient caches, and remove only exact task-created
+   artifacts. If a transient file enters a candidate ledger, discard that candidate
+   and regenerate from a clean canonical tree. Restore the prior reviewed lockfile
+   first when one exists; for a first lock, remove only the exact uncommitted
+   task-created candidate. Do not patch, normalize, or publish a contaminated ledger.
+3. Compare relative file sets and content hashes before release. A missing,
    extra, or different file is a release blocker, not a cosmetic discrepancy.
-3. After `apm install --frozen`, record the installer-reported target and
+4. After `apm install --frozen`, record the installer-reported target and
    verify the named Skill at that actual target, rather than assuming a
    configured or conventional directory was used.
-4. If `apm audit --ci` resolves a different target root, do not call the audit
+5. If `apm audit --ci` resolves a different target root, do not call the audit
    a pass or failure without direct evidence. Record the discrepancy, verify
    the installed file and lockfile hashes directly, and report the observed
    behavior for follow-up.
-5. After deployment, review the staged diff as well as the working tree. An
+6. After deployment, review the staged diff as well as the working tree. An
    installer can rewrite unchanged text with a different line ending; stage
    only the expected manifest, lockfile, canonical, and deployed outputs, then
    use `git diff --cached --check` and a content review to distinguish a real

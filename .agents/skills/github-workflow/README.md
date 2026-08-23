@@ -2,7 +2,8 @@
 
 ## Overview
 
-Create and review GitHub repository issues, pull requests, and their comments.
+Audit and change GitHub repository settings, and create or review issues, pull
+requests, and their comments.
 
 ## Install
 
