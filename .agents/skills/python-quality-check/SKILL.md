@@ -32,8 +32,9 @@ description: >-
 
 Use `code-quality-check` for general readability and maintainability,
 `security-check` for dependency provenance, release age, build hooks, secrets,
-and external executables, and `github-actions-quality-check` for workflow triggers,
-permissions, runners, action pins, and repository enforcement. Use
+and external executables, and `github-actions-quality-check` for workflow
+triggers, workflow-level `permissions:` declarations, runners, and action pins.
+Use `github-workflow` for repository settings and enforcement. Use
 `test-quality-check` for language-independent test design, classification,
 coverage policy, and overengineering audits.
 

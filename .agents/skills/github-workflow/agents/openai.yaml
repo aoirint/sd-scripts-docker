@@ -1,6 +1,4 @@
 interface:
   display_name: "GitHub Workflow"
-  short_description: "Create and review safe GitHub artifacts."
-  default_prompt: >-
-    Use $github-workflow to preflight, create, review, or update a GitHub issue,
-    pull request, or related artifact without disclosing private repositories.
+  short_description: "Manage safe GitHub settings and artifacts."
+  default_prompt: "Use $github-workflow to audit or change GitHub repository settings, or to preflight, create, review, or update a GitHub collaboration artifact."
