@@ -7,7 +7,7 @@ requires-python = "==3.10.*"
 # https://github.com/kohya-ss/sd-scripts/blob/6721028c79ee85a78b3a06dfd8954dae310a1cce/requirements.txt
 dependencies = [
   "accelerate==1.6.0",
-  "transformers==5.8.0",
+  "transformers==5.10.1",
   "diffusers[torch]==0.38.0",
   "ftfy==6.3.1",
   "opencv-python==4.10.0.84",
